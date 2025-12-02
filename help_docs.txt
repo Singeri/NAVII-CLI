@@ -1,0 +1,23 @@
+Navii Built-in Commands:
+---------------------------------
+cat <file(s)>       : Display the contents of file(s).
+cd <directory>      : Change the current working directory.
+clear               : Clear the terminal screen.
+cp <src> <dest>     : Copy a file from source to destination (non-recursive).
+echo <text>         : Print the arguments to the screen.
+exit                : Terminate the Navii shell.
+help                : Show this help message by reading this file.
+ls [directory]      : List contents of the current or specified directory.
+mkdir <dir>         : Create a new directory and any necessary parent directories.
+mv <src> <dest>     : Move or rename a file/directory.
+pwd                 : Print the current working directory.
+rm <file/dir>       : Remove a file or an empty directory.
+sudo <cmd> [args]   : **Execute a command with superuser privileges** (prompts for password).
+touch <file(s)>     : Create a new empty file(s).
+
+External Features:
+---------------------------------
+<command> [args]    : Execute any external program (e.g., sort, wc, grep).
+cmd1 | cmd2         : **Pipe** the standard output of cmd1 to the standard input of cmd2.
+cmd > file          : **Redirect** standard output of cmd to overwrite file (Output Redirection).
+cmd < file          : **Redirect** the contents of file to the standard input of cmd (Input Redirection).
