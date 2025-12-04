@@ -13,6 +13,8 @@ from commands.export_cmd import shell_export
 from commands.unset_cmd import shell_unset
 from commands.clear import shell_clear
 from commands.pwd import shell_pwd
+from utils.alias import shell_alias
+from commands.unalias import shell_unalias
 
 import sys
 
@@ -33,4 +35,6 @@ BUILTIN_COMMANDS = {
     "unset": shell_unset,
     "export": shell_export,
     "touch": shell_touch,
+    "alias": shell_alias,
+    "unalias": shell_unalias,
 }

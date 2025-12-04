@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import shlex
 
 def execute_navii_pipe(user_input):
     if user_input.count("|") != 1:
@@ -9,7 +10,7 @@ def execute_navii_pipe(user_input):
     left = user_input.split("|", 1)[0].strip()
     right = user_input.split("|", 1)[1].strip()
 
-    if left.split()[0] in ["cd", "exit"] or right.split()[0] in ["cd", "exit"]:
+    if shlex.split(left)[0] in ["cd", "exit"] or shlex.split(right)[0] in ["cd", "exit"]:
         print("Navii: Cannot pipe state-changing commands ('cd', 'exit').")
         return 1
 

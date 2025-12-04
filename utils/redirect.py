@@ -1,5 +1,8 @@
 import subprocess
 import sys
+import shlex
+
+from utils.alias import check_alias
 
 def execute_navii_redirect(user_input):
     if user_input.count(">") > 1 or user_input.count("<") > 1:
@@ -10,7 +13,10 @@ def execute_navii_redirect(user_input):
         print("Navii: Cannot combine pipes and redirection in a single command yet.")
         return 1
 
-    first_token = user_input.split()[0] if user_input.split() else ""
+    tokens = shlex.split(user_input) if user_input.strip() else []
+    alsname = check_alias(tokens[0])
+    first_token = tokens[0] if tokens else ""
+
     if first_token in ["cd", "exit"]:
         print(f"Navii: Command '{first_token}' is state-changing and cannot be redirected.")
         return 1

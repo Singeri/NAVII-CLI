@@ -3,10 +3,12 @@ import sys
 import readline
 import pathlib
 import getpass
+import shlex
 
 from utils.expands_vars import expand_vars_and_tilde
 from utils.redirect import execute_navii_redirect
 from utils.pipe import execute_navii_pipe
+from utils.alias import check_alias, save_alias, load_aliases
 from executor import execute_shell_command
 from Builtins import BUILTIN_COMMANDS
 
@@ -24,7 +26,7 @@ def main():
  |  |  ||  _  ||  :  |  |  |  |  | 
  |  |  ||  |  |\     /  |  |  |  | 
  |__|__||__|__| \ _ /  |____||____|
-"""
+ """
     print(logo)
 
     try:
@@ -40,7 +42,8 @@ def main():
         except:
             username = "guest"
 
-    print(f"Welcome home {username}")
+    print(f"Welcome home {username}\nType 'exit' to quit. Pipes (|), Redirection (>, <), external functions, expanded input, unset, aliasing/unaliasing and sudo are now supported. Type 'help' for command and function list.")
+
 
     while True:
         try:
@@ -53,20 +56,36 @@ def main():
                 continue
 
             expanded = expand_vars_and_tilde(user_input)
-
+            parts = shlex.split(expanded)
+            command = parts[0]
+            alsname = check_alias(command)
             if ">" in expanded or "<" in expanded:
-                execute_navii_redirect(expanded)
+                if alsname != None:
+                    parts[0] = alsname
+                execute_navii_redirect(" ".join(parts))
                 continue
 
             if "|" in expanded:
-                execute_navii_pipe(expanded)
+                if alsname != None:
+                    parts[0] = alsname
+                    execute_navii_pipe(" ".join(parts))
+                else:
+                    execute_navii_pipe(expanded)
                 continue
 
-            parts = expanded.split()
-            command = parts[0]
-
             if command in BUILTIN_COMMANDS:
-                BUILTIN_COMMANDS[command](parts[1:])
+                if alsname != None:
+                    if alsname in BUILTIN_COMMANDS:
+                        split_alsname = shlex.split(alsname)
+                        BUILTIN_COMMANDS[split_alsname[0]](split_alsname[1:])
+                    else:
+                        execute_shell_command(alsname + " " + " ".join(parts[1:]))
+                else:
+                    BUILTIN_COMMANDS[command](parts[1:])
+                continue
+            
+            if alsname != None:
+                execute_shell_command(alsname + " " + " ".join(parts[1:]))
                 continue
 
             execute_shell_command(expanded)
