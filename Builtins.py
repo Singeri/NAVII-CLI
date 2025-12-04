@@ -15,6 +15,8 @@ from commands.clear import shell_clear
 from commands.pwd import shell_pwd
 from utils.alias import shell_alias
 from commands.unalias import shell_unalias
+from commands.big_sister import big_sister_command
+from commands.eye import run_eye
 
 import sys
 
@@ -37,4 +39,6 @@ BUILTIN_COMMANDS = {
     "touch": shell_touch,
     "alias": shell_alias,
     "unalias": shell_unalias,
+    "big_sister": big_sister_command,
+    "eye": run_eye
 }
