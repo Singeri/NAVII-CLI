@@ -71,7 +71,7 @@ def main():
             if not user_input.strip():
                 continue
 
-            expanded = expand_vars_and_tilde(user_input)
+            expanded = expand_vars_and_tilde(user_input).replace(os.sep, os.sep * 2)
             parts = shlex.split(expanded)
             
             # Handle when expand_vars_and_tilde returns nothing
