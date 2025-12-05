@@ -1,9 +1,15 @@
+from utils.expands_vars import expand_vars_and_tilde
+
 import os
 
 def shell_cd(args):
     if not args:
-        print("Usage: cd <directory>")
-        return 1
+        try:
+            os.chdir(expand_vars_and_tilde("~"))
+            return 0
+        except Exception as e:
+            print(f"Navii: Didn't make it home. Error: {e}")
+            return 1
 
     target = args[0]
     try:
