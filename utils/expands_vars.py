@@ -98,4 +98,12 @@ def expand_vars_and_tilde(command_string):
         result.append(ch)
         i += 1
 
+    if in_double:
+        print("Navii: Needs to end with double quotes.")
+        result += '\"'
+    if in_single:
+        print("Navii: Needs to end with single quote.")
+        result += "\'"
+
+
     return "".join(result)
