@@ -11,6 +11,12 @@ def expand_vars_and_tilde(command_string):
     in_double = False
 
     def expand_var_name(name):
+        if os.name == 'nt':
+            for key in os.environ:
+                if key.lower() == name.lower():
+                    return os.environ[key]
+            return ""
+        
         return os.environ.get(name, "")
 
     while i < length:
@@ -41,7 +47,9 @@ def expand_vars_and_tilde(command_string):
             prev_char = command_string[i - 1] if i > 0 else None
             if prev_char is None or prev_char.isspace():
                 if i + 1 == length or command_string[i + 1] == "/" or command_string[i + 1].isspace():
-                    result.append(os.path.expanduser("~"))
+                    normalized_home = os.path.expanduser("~")
+                    normalized_home = os.path.normpath(normalized_home)
+                    result.append(normalized_home)
                     i += 1
                     continue
             result.append("~")

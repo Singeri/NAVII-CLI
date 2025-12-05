@@ -17,6 +17,7 @@ from utils.alias import shell_alias
 from commands.unalias import shell_unalias
 from commands.big_sister import big_sister_command
 from commands.eye import run_eye
+from commands.time import shell_time
 
 import sys
 
@@ -37,6 +38,7 @@ BUILTIN_COMMANDS = {
     "unset": shell_unset,
     "export": shell_export,
     "touch": shell_touch,
+    "time": shell_time,
     "alias": shell_alias,
     "unalias": shell_unalias,
     "big_sister": big_sister_command,

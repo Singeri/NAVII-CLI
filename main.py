@@ -31,7 +31,7 @@ MAX_HISTORY_SIZE = 1000
 
 def main():
     os.system("clear")
-    logo = """
+    logo = r"""
   ____    ____  __ __   ____  ____ 
  |    \  /    ||  |  | |    ||    |
  |  _  ||  o  ||  |  |  |  |  |  | 
@@ -71,6 +71,8 @@ def main():
 
             expanded = expand_vars_and_tilde(user_input)
             parts = shlex.split(expanded)
+            if len(parts) == 0:
+                continue
             command = parts[0]
             alsname = check_alias(command)
             if ">" in expanded or "<" in expanded:

@@ -61,6 +61,9 @@ sudo <command> [args]
 touch <file(s)>
     Create empty files or update modification timestamps.
 
+time
+    Shows the current time
+
 alias [NAME COMMAND]
     Create or list aliases.
     - To create an alias: alias ll "ls -l"
