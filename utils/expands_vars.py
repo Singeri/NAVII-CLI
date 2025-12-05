@@ -1,4 +1,5 @@
 import os
+import shlex
 
 def expand_vars_and_tilde(command_string):
     if not command_string:
@@ -16,7 +17,7 @@ def expand_vars_and_tilde(command_string):
                 if key.lower() == name.lower():
                     return os.environ[key]
             return ""
-        
+    
         return os.environ.get(name, "")
 
     while i < length:
@@ -47,8 +48,9 @@ def expand_vars_and_tilde(command_string):
             prev_char = command_string[i - 1] if i > 0 else None
             if prev_char is None or prev_char.isspace():
                 if i + 1 == length or command_string[i + 1] == "/" or command_string[i + 1].isspace():
-                    normalized_home = os.path.expanduser("~")
-                    normalized_home = os.path.normpath(normalized_home)
+                    normalized_home = os.path.normpath(os.path.expanduser("~"))
+                    if os.name == 'nt':
+                        normalized_home = normalized_home.replace(os.sep, os.sep * 2)
                     result.append(normalized_home)
                     i += 1
                     continue
