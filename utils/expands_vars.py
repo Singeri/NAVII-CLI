@@ -98,4 +98,10 @@ def expand_vars_and_tilde(command_string):
         result.append(ch)
         i += 1
 
+    if in_double:
+        result += '\"'
+    if in_single:
+        result += "\'"
+
+
     return "".join(result)

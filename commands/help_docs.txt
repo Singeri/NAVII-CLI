@@ -10,7 +10,12 @@ cat <file(s)>
 
 cd <directory>
     Change the current working directory.
-    Supports ~ expansion and environment variables.
+
+    -- "cd" (no argument): Changes to the user's "Home Directory" (~).
+    -- "cd <path>": Changes to the specified directory.
+    -- "cd -": Jumps back to the "Previous Working Directory" (stored in $OLDPWD)
+
+    Supports tilde (~) expansions and $VARIABLE expansions
 
 clear
     Clear the terminal screen.
@@ -36,6 +41,10 @@ export [VAR=value]
 help
     Display this help message.
 
+history
+    Show your command history in a numbered list.
+    (Commands are saved to ~/.navii_history).
+
 ls [directory]
     List the contents of a directory.
     Hidden files are omitted.
@@ -58,11 +67,25 @@ sudo <command> [args]
     Execute a command with superuser privileges.
     (Requires system 'sudo' installed.)
 
+sleep <seconds>
+    Pause execution for a specified number of seconds.
+    Accepts decimal values (e.g., 0.5).
+    Example: sleep 5
+
 touch <file(s)>
     Create empty files or update modification timestamps.
 
 time
-    Shows the current time
+    Shows the current time.
+
+history
+    Show your command history.
+
+hostname
+    Prints the network name of the host machine.
+
+id
+    Prints the user and group identity (UID and GID) of the current user.
 
 alias [NAME COMMAND]
     Create or list aliases.
@@ -77,6 +100,19 @@ unalias NAME
 
 unset <VAR>
     Remove an environment variable.
+
+which <command>
+    Locates the full path to an executable command by searching the $PATH environment variable
+
+------------------------------------------------------------
+Keyboard Features
+------------------------------------------------------------
+
+Tab-Completion
+    Use the "Tab" key to automatically complete built-in commands and file/directory paths.
+    -- "Single Tab": Completes a unique entry or suggests the longest commmon prefix.
+    -- *Double Tab:** Lists all possible matches.
+    -- Supports completion of paths starting with "~"
 
 ------------------------------------------------------------
 External Commands & System Utilities

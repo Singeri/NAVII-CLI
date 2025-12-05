@@ -18,6 +18,11 @@ from commands.unalias import shell_unalias
 from commands.big_sister import big_sister_command
 from commands.eye import run_eye
 from commands.time import shell_time
+from commands.history import shell_history
+from commands.which import shell_which
+from commands.sleep import shell_sleep
+from commands.body_body_body import body_body_body
+from commands.system_info import shell_hostname, shell_id
 
 import sys
 
@@ -31,11 +36,17 @@ BUILTIN_COMMANDS = {
     "echo": shell_echo,
     "help": shell_help,
     "ls": shell_ls,
+    "history": shell_history,
     "mkdir": shell_mkdir,
     "pwd": shell_pwd,
     "rm": shell_rm,
     "sudo": shell_sudo,
     "unset": shell_unset,
+    "BODY": body_body_body,
+    "which": shell_which,
+    "sleep": shell_sleep,
+    "hostname": shell_hostname,
+    "id": shell_id,
     "export": shell_export,
     "touch": shell_touch,
     "time": shell_time,
